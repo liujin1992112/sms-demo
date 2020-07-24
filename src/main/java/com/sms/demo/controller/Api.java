@@ -2,15 +2,14 @@ package com.sms.demo.controller;
 
 import cn.hutool.captcha.generator.RandomGenerator;
 import com.sms.demo.Constants;
+import com.sms.demo.mapper.dao.UserMapper;
+import com.sms.demo.mapper.model.User;
+import com.sms.demo.resp.Result;
 import com.sms.demo.sms.ISmsClient;
 import com.sms.demo.sms.SmsStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,15 +21,19 @@ public class Api {
     @Autowired
     private SmsStrategy smsStrategy;
 
-    @RequestMapping("/index")
-    public String index() {
-        return "hello world!~";
+    @Autowired
+    private UserMapper userMapper;
+
+    @GetMapping("login")
+    @ResponseBody
+    public Result<User> login() {
+        User user = userMapper.selectByPrimaryKey(1);
+        return Result.success(user);
     }
 
     @RequestMapping("/sendSms")
     @ResponseBody
-    public String sendSms(HttpServletRequest req, HttpSession session) {
-        String mobile = req.getParameter("mobile");
+    public String sendSms(@RequestParam String mobile, HttpSession session) {
 
         //生成四位的验证码
         RandomGenerator randomGenerator = new RandomGenerator("0123456789", 4);
@@ -50,7 +53,7 @@ public class Api {
                 session.removeAttribute(Constants.VERIFY_CODE);
                 timer.cancel();
             }
-        }, Constants.VERIFY_CODE_INVALIDATE_TIME);
+        }, Constants.VERIFY_CODE_INVALIDATE_TIME * 1000L);
 
         String tmplateid = "557706";
 
