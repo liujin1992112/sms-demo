@@ -2,13 +2,16 @@ package com.sms.demo.controller;
 
 import cn.hutool.captcha.generator.RandomGenerator;
 import com.sms.demo.Constants;
-import com.sms.demo.mapper.dao.UserMapper;
-import com.sms.demo.mapper.model.User;
+import com.sms.demo.mapper.dao.TbUserMapper;
+import com.sms.demo.mapper.model.TbUser;
 import com.sms.demo.resp.Result;
 import com.sms.demo.sms.ISmsClient;
 import com.sms.demo.sms.SmsStrategy;
+import com.sms.demo.util.BeanConvertUtils;
+import com.sms.demo.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpSession;
 import java.util.Timer;
@@ -22,13 +25,16 @@ public class Api {
     private SmsStrategy smsStrategy;
 
     @Autowired
-    private UserMapper userMapper;
+    private TbUserMapper tbUserMapper;
 
     @GetMapping("login")
     @ResponseBody
-    public Result<User> login() {
-        User user = userMapper.selectByPrimaryKey(1);
-        return Result.success(user);
+    public Result<UserVo> login() {
+        Example example = new Example(TbUser.class);
+        example.createCriteria().andEqualTo("id", 1);
+        TbUser tbUser = tbUserMapper.selectOneByExample(example);
+        UserVo vo = BeanConvertUtils.copyProperties(tbUser, UserVo.class);
+        return Result.success(vo);
     }
 
     @RequestMapping("/sendSms")

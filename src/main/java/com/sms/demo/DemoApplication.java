@@ -1,12 +1,13 @@
 package com.sms.demo;
 
 import com.sms.demo.listener.ApplicationStartListener;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * 通过Edit Configuration --> Environments variables --> spring.profiles.active = dev/test/prod决定配置文件
+ * 1、注意多个不同类型的application配置文件时，需要通过Edit Configuration --> Environments variables --> spring.profiles.active = dev/test/prod决定配置文件
+ * 2、springboot整合tk.mybatis时需要将注解修改为tk.mybatis.spring.annotation.MapperScan,不能使用org.mybatis.spring.annotation.MapperScan注解
  */
 @SpringBootApplication
 @MapperScan(basePackages = "com.sms.demo.mapper.*")

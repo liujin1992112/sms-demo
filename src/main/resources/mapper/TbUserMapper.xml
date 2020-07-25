@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.demo.mapper.dao.TbUserMapper">
+  <resultMap id="BaseResultMap" type="com.sms.demo.mapper.model.TbUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="vip_level" jdbcType="INTEGER" property="vipLevel" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="qq_num" jdbcType="VARCHAR" property="qqNum" />
+    <result column="wei_chat_num" jdbcType="VARCHAR" property="weiChatNum" />
+    <result column="vip_end_time" jdbcType="INTEGER" property="vipEndTime" />
+    <result column="time_created" jdbcType="INTEGER" property="timeCreated" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sms.demo.mapper.model.TbUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="avatar" jdbcType="LONGVARCHAR" property="avatar" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, gender, nick_name, vip_level, phone_num, qq_num, wei_chat_num, vip_end_time, 
+    time_created
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    avatar
+  </sql>
+</mapper>
