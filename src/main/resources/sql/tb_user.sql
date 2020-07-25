@@ -23,20 +23,20 @@ DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL,
   `gender` int(11) NOT NULL,
-  `nickName` varchar(100) DEFAULT NULL,
-  `vipLevel` int(11) NOT NULL,
-  `phoneNum` varchar(20) NOT NULL,
-  `qqNum` varchar(100) DEFAULT NULL,
-  `weiChatNum` varchar(100) DEFAULT NULL,
-  `vipEndTime` int(11) DEFAULT NULL,
+  `nick_name` varchar(100) DEFAULT NULL,
+  `vip_level` int(11) NOT NULL,
+  `phone_num` varchar(20) NOT NULL,
+  `qq_num` varchar(100) DEFAULT NULL,
+  `wei_chat_num` varchar(100) DEFAULT NULL,
+  `vip_end_time` int(11) DEFAULT NULL,
   `avatar` text NOT NULL,
-  `timeCreated` int(11) DEFAULT NULL,
+  `time_created` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_user` */
 
-insert  into `tb_user`(`id`,`gender`,`nickName`,`vipLevel`,`phoneNum`,`qqNum`,`weiChatNum`,`vipEndTime`,`avatar`,`timeCreated`) values (1,1,'缘阁阁',0,'',NULL,NULL,NULL,'https://static-test.kemiba.cn/6f721ffd13087b41f3038abececfba07/11B0F425C/avatar/000/300/841.jpg?v=1586921715',1586921364);
+insert  into `tb_user`(`id`,`gender`,`nick_name`,`vip_level`,`phone_num`,`qq_num`,`wei_chat_num`,`vip_end_time`,`avatar`,`time_created`) values (1,1,'缘阁阁',0,'',NULL,NULL,NULL,'https://static-test.kemiba.cn/6f721ffd13087b41f3038abececfba07/11B0F425C/avatar/000/300/841.jpg?v=1586921715',1586921364);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
