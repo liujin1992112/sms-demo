@@ -5,7 +5,7 @@ package com.sms.demo.vo;
  */
 public class UserVo {
     private int id;             //用户id
-    private byte gender;        //性别
+    private int gender;        //性别
     private boolean vipLevel;   //是否为vip
     private boolean phoneNum;   //
     private String qqNum;       //qq号
@@ -23,11 +23,11 @@ public class UserVo {
         this.id = id;
     }
 
-    public byte getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(byte gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
