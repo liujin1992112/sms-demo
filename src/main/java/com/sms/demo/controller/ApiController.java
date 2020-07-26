@@ -9,17 +9,24 @@ import com.sms.demo.sms.ISmsClient;
 import com.sms.demo.sms.SmsStrategy;
 import com.sms.demo.util.BeanConvertUtils;
 import com.sms.demo.vo.UserVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@Api(tags = "Api接口模块")
 @RestController
 @RequestMapping("api")
-public class Api {
+public class ApiController {
 
     @Autowired
     private SmsStrategy smsStrategy;
@@ -27,9 +34,11 @@ public class Api {
     @Autowired
     private TbUserMapper tbUserMapper;
 
+    @ApiOperation("登录获取用户信息")
     @GetMapping("login")
     @ResponseBody
-    public Result<UserVo> login() {
+    public Result<UserVo> login(HttpServletRequest req, @RequestParam String mobile) {
+        String userAgent = req.getHeader("User-Agent");
         Example example = new Example(TbUser.class);
         example.createCriteria().andEqualTo("id", 1);
         TbUser tbUser = tbUserMapper.selectOneByExample(example);
@@ -37,9 +46,13 @@ public class Api {
         return Result.success(vo);
     }
 
-    @RequestMapping("/sendSms")
+    @ApiOperation("发送短信验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "mobile", value = "手机号码", defaultValue = "13121510595"),
+    })
+    @GetMapping("/sendSms")
     @ResponseBody
-    public String sendSms(@RequestParam String mobile, HttpSession session) {
+    public String sendSms(@RequestParam(required = true) String mobile, HttpSession session) {
 
         //生成四位的验证码
         RandomGenerator randomGenerator = new RandomGenerator("0123456789", 4);
