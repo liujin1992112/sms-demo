@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.demo.mapper.dao.TbVipMapper">
+  <resultMap id="BaseResultMap" type="com.sms.demo.mapper.model.TbVip">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="vip_id" jdbcType="VARCHAR" property="vipId" />
+    <result column="vip_name" jdbcType="VARCHAR" property="vipName" />
+    <result column="month" jdbcType="INTEGER" property="month" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="end_time" jdbcType="INTEGER" property="endTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sms.demo.mapper.model.TbVip">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="vip_image" jdbcType="LONGVARCHAR" property="vipImage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, vip_id, vip_name, `month`, price, end_time
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    vip_image
+  </sql>
+</mapper>
